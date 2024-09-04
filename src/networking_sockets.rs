@@ -577,14 +577,12 @@ impl<Manager: 'static> NetConnection<Manager> {
             .unwrap()
             .independent_connections
             .insert(handle, sender);
-        let callback =
-            networking_sockets_callback::get_or_create_connection_callback(inner.clone(), sockets);
         NetConnection {
             handle,
             sockets,
             inner,
             socket: None,
-            _callback_handle: Some(callback),
+            _callback_handle: None,
             _event_receiver: Some(receiver),
             message_buffer: Vec::new(),
             is_handled: false,
